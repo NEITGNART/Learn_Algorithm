@@ -92,31 +92,31 @@ int sumOfDigits(int x) {
 }
 
 signed main() {
-	//Note, we use n is variant for sovle all the problem- Maybe in eight quees problem we use 4*4
+	//Note, we use n is variant for solve all the problem- Maybe in eight quees problem we use 4*4
 	
 	
 	
-	/*Write the function/code to sovle problem here(Fibonacci)*/
+	/*Write the function/code to solve problem here(Fibonacci)*/
 	//We use n is variant
 	int n = 5; // answer is 5
 //	cout << Fibonacci(n);
 	/*vector <int> a(n);
 	cout << Fibonacci_Kaisen(a);*/
 
-	/*Write the function/code to sovle problem here(x(n), y(n))*/
+	/*Write the function/code to solve problem here(x(n), y(n))*/
 	// adjusted n = 1 answer is : X = 1, Y = 3; 
 	//cout << X(n) << endl; 
 	//cout << Y(n) << endl;
 
-	/*Write the function/code to sovle problem here(X(n))*/
+	/*Write the function/code to solve problem here(X(n))*/
 
 	// cout << X_Kaisen(2);
 
 	// 2^2*X(0) + 1^2*X(1)= 1^2*1*1*X(0), answer is 5 :>
-	/*Write the function/code to sovle problem here(C(n, k))*/
+	/*Write the function/code to solve problem here(C(n, k))*/
 	//cout << C(n, 3);
-	/*Write the function/code to sovle problem here(toBinary)*/
+	/*Write the function/code to solve problem here(toBinary)*/
 //	toBinary(n);
-	/*Write the function/code to sovle problem here(sumofDigits)*/
+	/*Write the function/code to solve problem here(sumofDigits)*/
 	cout << sumOfDigits(n);
 }
