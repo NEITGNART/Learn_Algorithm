@@ -91,6 +91,26 @@ int sumOfDigits(int x) {
 	return x + sumOfDigits(x - 1);
 }
 
+void dfs(int idx, vector<int>& path, vector<vector<int>>& res,  vector<int>& nums) {
+	res.push_back(path);
+
+	for (int i = idx; i < nums.size(); ++i){
+		path.push_back(nums[i]);
+		dfs(i + 1, path, res, nums);
+		path.pop_back();
+
+	}
+}
+
+vector<vector<int>> subsets(vector<int> nums) {
+	vector<vector<int>> res;
+	vector<int> path;
+	dfs(0, path, res, nums);
+	return res;
+}
+
+
+
 signed main() {
 	//Note, we use n is variant for solve all the problem- Maybe in eight quees problem we use 4*4
 	
@@ -118,5 +138,20 @@ signed main() {
 	/*Write the function/code to solve problem here(toBinary)*/
 //	toBinary(n);
 	/*Write the function/code to solve problem here(sumofDigits)*/
-	cout << sumOfDigits(n);
+	//cout << sumOfDigits(n);
+	// Subset using dfs
+	vector<vector<int>> a;
+	vector<int> nums;
+	nums.push_back(1);
+	nums.push_back(2);
+	nums.push_back(3);
+
+	a = subsets(nums);
+
+	for (int i = 0; i < a.size(); ++i) {
+		for (int j = 0; j < a[i].size(); ++j) {
+			cout << "[" << a[i][j] << "]";
+		}
+		cout << endl;
+	}
 }
