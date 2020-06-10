@@ -92,8 +92,9 @@ int sumOfDigits(int x) {
 }
 
 void dfs(int idx, vector<int>& path, vector<vector<int>>& res,  vector<int>& nums) {
-	res.push_back(path);
 
+	res.push_back(path);
+	
 	for (int i = idx; i < nums.size(); ++i){
 		path.push_back(nums[i]);
 		dfs(i + 1, path, res, nums);
@@ -109,7 +110,33 @@ vector<vector<int>> subsets(vector<int> nums) {
 	return res;
 }
 
+void DFS(int var, vector<vector<int>>& res, vector<int>& path, vector<bool>& visited, vector<int> nums) {
+	if (var == nums.size()) {
+		res.push_back(path);
+		return;
+	}
+	else {
+		for (int i = 0; i < nums.size(); ++i) {
+			if (visited[i] == false) {
+				visited[i] = true;
+				path.push_back(nums[i]);
+				DFS(var + 1, res, path, visited, nums);
+				path.pop_back();
+				visited[i] = false;
+			}
+		}
+	}
+}
 
+
+vector<vector<int>> permutation(vector<int> nums) {
+	vector<vector<int>> res;
+	vector<int> path;
+	vector<bool> visited(nums.size(), false);
+	DFS(0, res, path, visited, nums);
+	return res;
+
+}
 
 signed main() {
 	//Note, we use n is variant for solve all the problem- Maybe in eight quees problem we use 4*4
@@ -146,12 +173,13 @@ signed main() {
 	nums.push_back(2);
 	nums.push_back(3);
 
-	a = subsets(nums);
-
+	/*a = subsets(nums);*/
+	a = permutation(nums);
 	for (int i = 0; i < a.size(); ++i) {
 		for (int j = 0; j < a[i].size(); ++j) {
 			cout << "[" << a[i][j] << "]";
 		}
 		cout << endl;
 	}
+	
 }
