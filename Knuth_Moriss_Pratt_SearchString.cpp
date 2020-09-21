@@ -1,41 +1,91 @@
+
 #include <bits/stdc++.h>
 
 using namespace std;
 
-void PREKMP(char *pattern, int next[], int m) {
-	int i = 0; 
+vector<int> PRE(const string& pattern) {
+	int m = pattern.size();
+	vector<int> next(m);
+
+	int i = 0;
 	int j = next[0] = -1;
-	while (i < m) {
-		while (j > -1 && pattern[i] != pattern[j]) j = next[j];
-		++i; ++j;
-		if (pattern[i] == pattern[j]) {
-			next[i] = next[j];
-		}
-		else next[i] = j;
+
+	/*
+	string text = "AAAAATTAAA";
+	string pattern = "AAAT";
+	*/
+	//i = 1 và j = 0
+	//next[0] = -1;'
+	while (i < m -1) {
+		if (j > -1 && pattern[i] != pattern[j]) j = next[j];
+		++i;
+		++j;
+		next[i] = j;
 	}
+	return next;
+	
+/*
+i = 1 và j = 0 thì  next[0] = -1 và next[1] = 0; (bất biến lúc nào cũng xảy ra)
+
+	pattern[1] có bằng pattern[0] hay không (có bằng) thì i = 2 và j = 1 và next[2] = 1;
+
+	pattern[2] có bằng pattern[1] hay không (có bằng) i = 3 j = 2 vậy next[3] = 2;
+
+	pattern[3] có bằng pattern[2] hay không (không bằng) thì lúc này j = next[j] (có nghĩa là nhảy vào vị trí thích hợp)
+	thì lúc này j = next[2] = 1 thì j = 1;
+	i = 4  và j = 2 next[4] = 2;
+
+
+		
+	next[4] = 2;
+
+	VẬY KẾT LUẬN RÚT RA LÀ NẾU MÀ VIỆC SO KHỚP VỚI BẢN THÂN MÀ TRÙNG NHAU thì bảng next[i] = j
+	còn nếu không thì j = next[j] có nghĩa là là lùi về 1 vị trí thích hợp để tiếp tục việc so khớp
+
+*/
 }
 
-int KMP(char *text, char *pattern) {
-	int n = strlen(text);
-	int m = strlen(pattern);
-	int next[m];
-	PREKMP(pattern, next, m);
-	int i = 0, j = 0;
+int KMP(const string& text, const string& pattern) {
+	vector<int> next(PRE(pattern));
+
+
+	int i = 0, j = 0, n = text.size(), m = pattern.size();
+	cout << "m: " << m << endl;
 	while (i < n) {
-		while (j > -1 && text[i] != pattern[j]) j = next[j];
+		// cout << "i: " << i << "   j: " << j << endl;
+		while (j > -1 && text[i] != pattern[j]) {
+			j = next[j];
+			//cout << "       j: " << j << " ";
+		}
 		++i; ++j;
-		if (j >= m) return (i - j);
+		if (j == m) return i - j;
 	}
-	return -1;
+	return 0;
+	/*
+	m: 4
+	i: 0   j: 0
+	i: 1   j: 1
+	i: 2   j: 2
+	i: 3   j: 3
+        	j: 2 i: 4   j: 3
+       		j: 2 i: 5   j: 3
+	Pattern: AAAT found at index = 2
+	*/
 }
 
 int main(void) {
-	
-	char text[100];
-	strcpy(text, "Anhtiendeptrai");
-	char pattern[100];
-	strcpy(pattern, "tien");
-	if (KMP(text, pattern) != -1) cout << "Found at index: " << KMP(text, pattern) << endl;
-	else cout << "Not Found\n";
+
+	string text = "AAAAATTAAA";
+	string pattern = "AAAT";
+
+	int x = KMP(text, pattern);
+
+	if (x != 0) {
+		cout << "Pattern: " << pattern << " found at index = " << x << endl;
+	}
+	else {
+		cout << "Pattern: " << pattern << " not found.\n";
+	}
+
 	return 0;
 }
