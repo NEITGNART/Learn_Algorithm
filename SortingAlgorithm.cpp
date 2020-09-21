@@ -58,6 +58,35 @@ cuối cùng thì ta sẽ gán phần tử saved cho vị trí a[j]
     a[j] = saved; 
   }
   
+/*
+**SHELL SORT
+  tư tưởng giống như insertion sort thay vì mỗi lần check inner loops chỉ
+  dịch có 1 phần tử rồi tiếp tục làm như vậy thì
+  shell sort mỗi lần dịch chuyển thì nó sẽ dịch n / 2 khoảng trống
+  và có nhiều cách cài đặt cho nên độ phức tạp của nó là một vấn đề mở
+  có những cách đề xuất như sau:
+  Shell đề xuất
+    h1 = n
+    hi+1 = h2i
+  Hibbard đề nghị
+    hi = 2i − 1
+  Knuth đưa ra
+    h1 = 1; hi+1 = 3hi + 1
+  Pratt đề xuất
+    h1 = 1; hi = 2p3q
+
+  */
+  for (int gap = n/2; gap > 0; gap /= 2) {
+    for (int i = gap; i < n; ++i) {
+      int j;
+      saved = a[i];
+      for (j = i; j >= gap && a[j-gap] > saved; j -= gap)
+          a[j] = a[j-gap];
+      a[j] = saved;
+    }	
+  }
+	
+	
   for (int i = 0; i < 4; ++i){
     cout << a[i] << endl;
   }
