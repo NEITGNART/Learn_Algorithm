@@ -62,9 +62,8 @@ cuối cùng thì ta sẽ gán phần tử saved cho vị trí a[j]
 **SHELL SORT
   tư tưởng giống như insertion sort thay vì mỗi lần check inner loops chỉ
   dịch có 1 phần tử rồi tiếp tục làm như vậy thì
-  shell sort mỗi lần dịch chuyển thì nó sẽ dịch n / 2 khoảng trống
-  và có nhiều cách cài đặt cho nên độ phức tạp của nó là một vấn đề mở
-  có những cách đề xuất như sau:
+  shell sort mỗi lần dịch chuyển thì nó sẽ dịch n / 2 khoảng trống và mỗi lần giảm n / 2 ...tức là giảm theo loga tự nhiên
+  cho đến khi = 0 và có nhiều cách cài đặt cho nên độ phức tạp của nó là một vấn đề mở có những cách đề xuất như sau:
   Shell đề xuất
     h1 = n
     hi+1 = h2i
