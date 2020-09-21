@@ -41,7 +41,9 @@ i = 1 và j = 0 thì  next[0] = -1 và next[1] = 0; (bất biến lúc nào cũn
 
 	VẬY KẾT LUẬN RÚT RA LÀ NẾU MÀ VIỆC SO KHỚP VỚI BẢN THÂN MÀ TRÙNG NHAU thì bảng next[i] = j
 	còn nếu không thì j = next[j] có nghĩa là là lùi về 1 vị trí thích hợp để tiếp tục việc so khớp
-
+	CẢI TIẾN KHI MÀ thay vì next[j] phải backtrack lùi về vị trí mismatch thêm 1 lần nữa thì ta sẽ tiết kiệm ít nhất ít lần so
+	khi đó chỉ cần thêm dòng lệnh if (pattern[i] == pattern[j]) next[i] = next[j];
+		else next[i] = j;
 */
 }
 
