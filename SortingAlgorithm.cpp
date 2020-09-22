@@ -373,7 +373,7 @@ int main(void) {
 	return 0;
 }
 
-// ********************** Merge Sort using devide
+// ********************** Merge Sort using devide and conquer like quicksort but quicksort using randomize
 #include <iostream>
 #include <string>
 #include <vector>
