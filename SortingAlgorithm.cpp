@@ -373,7 +373,81 @@ int main(void) {
 	return 0;
 }
 
+// ********************** Merge Sort using devide
+#include <iostream>
+#include <string>
+#include <vector>
 
+using namespace std;
+
+
+void merge(int a[], int l, int m, int h) {
+
+	// tạo 2 mảng tạm
+
+	int n1 = m - l + 1;
+	int n2 = h - m;
+
+	vector<int> b(n1), c(n2);
+	
+	
+	for (int i = 0; i < n1; ++i) {
+		b[i] = a[l + i];  // chạy đến mid
+	}
+
+	for (int j = 0; j < n2; ++j) {
+		c[j] = a[m + j + 1] ; // chạy từ mid + 1 trở đi
+	}
+	
+	
+	int i = 0, j = 0, k = l;
+	// dùng 3 while để merge
+	//   5 2 3  
+	//   7 4 1 4
+
+	while (i < n1 && j < n2) {
+		if (b[i] < c[j]) {
+			a[k] = b[i];
+			++i; ++k;
+		}
+		else {
+			a[k] = c[j];
+			++j; ++k;
+		}
+	}
+	while (i < n1) {
+		a[k] = b[i];
+		++i; ++k;
+	}
+	while (j < n2) {
+		a[k] = c[j];
+		++j; ++k;
+	}
+}
+
+void MergeSort(int a[], int l, int h) {
+	if (h-l > 0) {
+		int mid = (l + h )/ 2;
+		MergeSort(a, l, mid);
+		MergeSort(a, mid + 1, h);
+		merge(a, l, mid, h);
+	}
+}
+
+
+int main(void) {
+
+	const int n = 6;
+	int a[n] = {6,5,4,3,2,1};
+
+	MergeSort(a, 0, n - 1);
+	
+	for (int i = 0; i < 6; ++i) {
+			cout << a[i] << " ";
+	}
+	
+	return 0;
+}
 
 
 
