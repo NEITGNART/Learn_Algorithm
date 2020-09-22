@@ -175,3 +175,208 @@ int main(void) {
 	}
 	return 0;
 }
+
+
+
+
+/*
+
+	Bắt đầu từ mảng [6, 5, 4, 3, 2, 1]
+	            	 0  1   2  3  4  5   
+			6
+		       
+		    5	     4
+			
+		3     2        1
+
+Buiding MIN_HEAP tree ROOT = (i - 1)/2
+		    LEFT CHILD = (2*i + 1)
+ 		    RIGHT CHILD = (2*i + 2)
+
+đầu tiên bắt đầu ở vị trí là n / 2 -1 có nghĩa là vị ở ở giữa 
+chúng ta có 6 phần tử đó đó a[i] = a[mid] = a[6/2-1] = a[2] = 4 <i> =2 
+khởi tạo saved = a[i]   =  a[n/2 -1] = 4 |  <saved = 4>
+trong vòng while chỉ chạy đến n / 2 
+do đó child = 2 * (n / 2 -1) + 1  = 2 *2 = 5; 
+if (child < n - 1) rồi kiểm tra tiếp là a[child] có lớn hơn a[child+1] hay không
+nghĩa là 5 so với 5 thì false 
+-> child = 5
+kiểm tra saved <= a[5] hay không . Thì saved = 4   <= 1 là sai nên ko break
+gán a[i] = a[child] có nghĩa là gán a[2] = a[5] 
+ <a[2] = 1>
+ <i = 5>
+check 5 < 3 false thoát while
+
+xuống dưới gán a[5] = 4 => <a[5] = 4>
+
+Do đó mảng trở thành [6, 5, 1, 3, 2, 4]
+		    0   1   2  3  4  5
+
+-- --->
+    			        6
+
+ 		            5      1
+
+		        3     2     4
+
+----->>
+
+
+tiếp theo đi dần xuống phía bên trái của mảng 
+do đó ở trên i = 2 thì vòng lặp tiếp theo thì i = 1
+saved = a[1] = 5
+child = 2 * i + 1 = 3 
+
+xét xem child có phải là kế cuối hay chưa
+3 < 5 và a[3] = 3 có lớn hơn a[4] hay không thì 3 > 2
+do đó child = 4
+xét xem 5 <= 2 hay ko thì là false
+do đó <a[1] = 2>
+và i = child và i = 4
+
+4 < 3 là sai nên break while loops
+
+ra ngoài thì gán <a[4] = 5>
+
+Do đó mảng trở thành [6, 2, 1, 3, 5, 4]
+		    0   1   2  3  4  5
+  			       6
+	
+ 		            2     1
+
+		        3      5       4
+
+
+------>>>
+
+cuối cùng là xét đến nút gốc thì kiểm tra xem là
+bên trái và bên phải thằng nào lơn hơn thì lấy thằng 2 > 1 thì lấy thằng 1
+tại do làm MIN HEAP
+do 6 nó lớn 5 nên 
+gán a[1] = 1
+ i = 2 
+saved = 6
+child = 2 
+
+
+<a[0] = 1>  và i = 2 
+Do đó mảng trở thành [1, 2, 1, 3, 5, 4]
+		    0   1   2  3  4  5
+
+
+			       1
+	
+ 		            2     1
+
+		        3     5       4
+
+
+tiếp tục do 2 < 3 nên tiếp tục vòng while thì 
+child = 5
+
+
+saved = 6 <= 4 là sai nên 
+ 
+<a[2] = a[5] = 4>
+
+i = 5 
+
+a[5] = 6
+
+Do đó mảng trở thành [1, 2, 4, 3, 5, 6]
+		    0   1   2  3  4  5
+  
+			       1 
+	
+ 		            2     4
+
+		        3     5       6
+
+Build Heap đã xong
+
+
+Bây giờ chuyển qua sort 
+
+Tư tưởng giống như là selection sert mỗi lần sort xong thì chèn vào cuối mảng
+làm tương tự như vậy cho đến khi hết phần tử 
+có thể xem trên geekforgeek
+
+Mỗi lần mà Heapify thì chắc chắn là phần tử nhỏ nhất sẽ nằm ở root
+khi đó chỉ cần swap root với phần tử cuối cùng lần lượt thu hẹp vì đầu mảng
+thì hoàn thành
+
+
+Muốn trở thành Max Heap thì khi mà so sánh 2 nodes con thì 
+ta sẽ lấy thằng nào mà lớn là ok.
+
+
+
+
+*/
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+
+/*
+ * 
+ */
+void Heapify(int a[], int n, int i) {
+//	cout << "initialize i: " << i << endl;
+	int saved = a[i]; 
+	
+	while (i < n/2) { 
+		int child = 2 * i + 1;
+	//	cout << "child: " << child << endl;
+		if (child < n - 1)
+		if (a[child] > a[child + 1]) { /*cout << "child++" << endl; */++child; }
+		if (saved <= a[child]) break;
+		a[i] = a[child];
+	//	cout << "a[i]: " << a[i] << " ";
+		i = child;
+	//	cout << "i: " << i <<  " " <<  endl;
+	}
+	a[i] = saved;
+//	cout << "a[i]: outter loops: " << a[i] << endl;
+	
+}
+
+void BuildHeap(int a[], int n) {
+	for (int i = n / 2 - 1; i >= 0; --i) {    
+		Heapify(a, n, i);
+	}
+}
+
+void HeapSort(int a[], int n) {
+	BuildHeap(a, n);
+	for (int i = n-1; i >= 0; --i) {
+		swap(a[0], a[i]);
+		Heapify(a, i, 0);
+		
+	}
+	
+}
+
+int main(void) {
+
+	const int n = 6;
+	int a[n] = {6,5,4,3,2,1};
+
+	HeapSort(a, n);
+	for (int i = 0; i < 6; ++i) {
+			cout << a[i] << " ";
+		}
+		cout << endl;
+	return 0;
+}
+
+
+
+
+
+
+
+
