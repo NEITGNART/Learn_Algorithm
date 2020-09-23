@@ -496,7 +496,7 @@ void RadixSort(vector<int>& a) {
 	queue<long> queues[radix];
 	for (int i = 0, factor = 1; i < digits; factor *= radix, ++i) {
 		for (int j = 0; j < a.size(); ++j) {
-			queues[(a[j] / factor) % radix].push(a[j]); // đẩy vòng trong queue 2 tầng 
+			queues[(a[j] / factor) % radix].push(a[j]); // đẩy vào trong từng tầng của queue
 		}
 		// (a[j] / factor) % radix  chia cho 1 rồi 10 rồi 100 . Mod để lấy chữ số cuối cùng
 		int tmp = 0;
