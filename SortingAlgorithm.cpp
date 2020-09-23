@@ -450,7 +450,34 @@ int main(void) {
 }
 
 
+// ** Counting Sort sử dụng 1 mảng tạm để lưu trữ tần xuất xuất hiện rồi duyệt mảng từ 0 -> max + 1 ( với max là phần tử lớn nhất trong mảng)
+#include <bits/stdc++.h>
 
+using namespace std;
+
+#define FOR(i, n) for (int i = 0; i < n; ++i)
+
+int main(void) {
+
+  vector<int> a = {123,12,1,2,3,1};
+  int max  = *max_element(a.begin(), a.end());
+  vector<int> T(max);
+  FOR(i, max) T[i] = 0;
+
+  FOR(i, a.size()) T[a[i]]++;
+
+  int i = 0;
+  FOR(j, max) {
+    while (T[j] > 0) {
+      a[i++] = j;
+      T[j]--;
+    }
+  }
+  for (auto x : a) {
+    cout << x << " ";
+  }
+ 
+}
 
 
 
