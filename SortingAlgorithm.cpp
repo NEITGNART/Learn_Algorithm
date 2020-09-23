@@ -479,5 +479,44 @@ int main(void) {
  
 }
 
+// ** Radix sort sắp theo hàng đơn vị hàng chục hàng trăm ... phụ thuộc vào số lượng chữ số
+#include <algorithm>
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <string>
 
+using namespace std;
+
+void RadixSort(vector<int>& a) {
+	const int radix = 10; // xét hệ cơ số 10 chạy từ 0->9
+	const int digits = (int)log10(*max_element(a.begin(), a.end())) + 2;
+	// digits là số lượng chữ số
+	int factor, k;
+	queue<long> queues[radix];
+	for (int i = 0, factor = 1; i < digits; factor *= radix, ++i) {
+		for (int j = 0; j < a.size(); ++j) {
+			queues[(a[j] / factor) % radix].push(a[j]); // đẩy vòng trong queue 2 tầng 
+		}
+		// (a[j] / factor) % radix  chia cho 1 rồi 10 rồi 100 . Mod để lấy chữ số cuối cùng
+		int tmp = 0;
+		for (k = 0; k < radix; ++k) {
+			while (!queues[k].empty()) {
+				a[tmp++] = queues[k].front(); queues[k].pop(); 
+			}
+		}
+	}
+	
+}
+
+int main(void) {
+
+	vector<int> a{ 3,1,231,5,6 };
+	RadixSort(a);
+	for (auto x : a) {
+		cout << x << " ";
+	}
+	
+	return 0;
+}
 
