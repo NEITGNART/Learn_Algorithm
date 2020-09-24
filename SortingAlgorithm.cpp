@@ -302,7 +302,7 @@ làm tương tự như vậy cho đến khi hết phần tử
 có thể xem trên geekforgeek
 
 Mỗi lần mà Heapify thì chắc chắn là phần tử nhỏ nhất sẽ nằm ở root
-khi đó chỉ cần swap root với phần tử cuối cùng lần lượt thu hẹp vì đầu mảng
+khi đó chỉ cần swap root với phần tử cuối cùng lần lượt thu hẹp đến đầu mảng
 thì hoàn thành
 
 
