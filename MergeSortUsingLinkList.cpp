@@ -34,64 +34,19 @@ public:
 	void RemoveDuplicate();
 	void BubbleSort();
 	List Merge(List& l, List& k);
-
-	void merge(int l, int m, int h) {
-
-		int n1 = m - l + 1;
-		int n2 = h - m;
-
-		vector<int> b(n1), c(n2);
-
-		Node* p = head;
-		
-		for (int i = 0; i < l - 1; ++i) {
-			p = p->next;
+	void merge(int l, int m, int h);
+	void MergeSort(int l, int h);
+	void Reverse() {
+		Node* cur = head;
+		Node* prev = nullptr;
+		Node* nxt = nullptr;
+		while (cur) {
+			nxt = cur->next;
+			cur->next = prev;
+			prev = cur;
+			cur = nxt;
 		}
-		
-		for (int i = 0; i < n1 && p != nullptr; ++i, p = p->next) {
-			b[i] = p->data; 
-		}
-
-		for (int j = 0; j < n2 && p != nullptr; ++j, p = p->next) {
-			c[j] = p->data;
-		}
-
-		int i = 0, j = 0, k = l;
-
-		Node* temp = head;
-
-		for (int i = 0; i < l - 1; ++i) {
-			temp = temp->next;
-		}
-		
-		while (i < n1 && j < n2) {
-			if (b[i] < c[j]) {
-				temp->data = b[i];
-				++i; temp = temp->next;
-			}
-			else {
-				temp->data = c[j];
-				++j; temp = temp->next;
-			}
-		}
-		while (i < n1 && temp != nullptr) {
-			temp->data = b[i];
-			++i; temp = temp->next;
-		}
-		while (j < n2 && temp != nullptr) {
-			temp->data = c[j];
-			++j; temp = temp->next;
-		}
-		
-	}
-
-	void MergeSort(int l, int h) {
-		if (h - l > 0) {
-			int mid = (l + h) / 2;
-			MergeSort(0, mid);
-			MergeSort(mid + 1, h);
-			merge(l, mid, h);
-		}
+		head = prev;
 	}
 
 };
@@ -156,6 +111,69 @@ List List::Merge(List& l, List& k) {
 		curp = curp->next;
 	}
 	return list;
+}
+
+void List::merge(int l, int m, int h) {
+
+	int n1 = m - l + 1;
+	int n2 = h - m;
+
+	vector<int> b(n1), c(n2);
+
+	Node* p = head;
+
+	for (int i = 0; i < l - 1; ++i) {
+		p = p->next;
+	}
+
+	for (int i = 0; i < n1 && p != nullptr; ++i, p = p->next) {
+		b[i] = p->data;
+	}
+
+	for (int j = 0; j < n2 && p != nullptr; ++j, p = p->next) {
+		c[j] = p->data;
+	}
+
+	int i = 0, j = 0, k = l;
+
+	Node* temp = head;
+
+	for (int i = 0; i < l - 1; ++i) {
+		temp = temp->next;
+	}
+
+	while (i < n1 && j < n2) {
+		if (b[i] < c[j]) {
+			temp->data = b[i];
+			++i;
+			temp = temp->next;
+		}
+		else {
+			temp->data = c[j];
+			++j;
+			temp = temp->next;
+		}
+	}
+	while (i < n1 && temp != nullptr) {
+		temp->data = b[i];
+		++i;
+		temp = temp->next;
+	}
+	while (j < n2 && temp != nullptr) {
+		temp->data = c[j];
+		++j;
+		temp = temp->next;
+	}
+
+}
+
+void List::MergeSort(int l, int h) {
+	if (h - l > 0) {
+		int mid = (l + h) / 2;
+		MergeSort(0, mid);
+		MergeSort(mid + 1, h);
+		merge(l, mid, h);
+	}
 }
 
 
@@ -257,7 +275,7 @@ int main(void) {
 	List l;
 	fin >> l;
 
-	l.MergeSort(0, 5);
+	l.Reverse();
 
 	cout << l << endl;
 	
