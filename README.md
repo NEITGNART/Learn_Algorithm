@@ -1,2 +1,4 @@
 Everyday algorithm...
-25/09/2020 - NO ALGORITHM TODAY
+________________________________
+25/09/2020 - NO ALGORITHM TODAY |
+________________________________|
