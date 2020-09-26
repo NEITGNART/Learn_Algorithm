@@ -48,11 +48,12 @@ public:
 			}
 		}
 	}
-	void Traversal(Node *root) {
+	void Traversal(Node *root, int depth) {
 		if (root != nullptr) {
-			Traversal(root->left);
-			cout << root->key << " ";
-			Traversal(root->right);
+			for (int i = 0; i < depth; ++i) cout << "  ";
+			cout << root->key << " " << endl;
+			Traversal(root->left, depth+1);
+			Traversal(root->right, depth+1);
 		}
 	}
 };
@@ -64,24 +65,16 @@ int main(void) {
 	
 	BST tree(root);
 
-	tree.Insert(10);
-	
-	tree.Insert(20);
-
-	tree.Insert(4);
-	tree.Insert(2);
-	tree.Insert(3);
-	tree.Insert(1);
-	tree.Insert(5);
-	
 	tree.Insert(6);
-	tree.Insert(22);
-	tree.Insert(10);
-
+	tree.Insert(3);
+	tree.Insert(4);
+	tree.Insert(9);
+	tree.Insert(8);
+	tree.Insert(11);
 	
-	
 
-	tree.Traversal(root);
+	tree.Traversal(root, 1);
+	
 	
 	return 0;
 }
