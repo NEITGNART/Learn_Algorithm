@@ -1,4 +1,4 @@
-// This code has been submited and AC in Geekforgeek.
+// This code has been submitted and AC in Geekforgeek.
 
 // { Driver Code Starts
 //
