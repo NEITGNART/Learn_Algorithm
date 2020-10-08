@@ -100,11 +100,8 @@ cuối cùng thì ta sẽ gán phần tử saved cho vị trí a[j]
 using namespace std;
 
 int partition(int s[], int l, int h) {
-	int p; // pivot element index
-	int firsthigh; // divider position for pivot
-	
-	p = h;
-	firsthigh = l;
+	int p = h; // pivot element index
+	int firsthigh = l; // divider position for pivot 
 	for (int i = l; i < h; ++i) {
 		if (s[i] < s[p]) {
 			swap(s[i], s[firsthigh]);
