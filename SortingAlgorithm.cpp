@@ -42,8 +42,8 @@ int main(void) {
 luôn luôn bắt đầu tại ví trí thứ 2 
 
 đặt saved  là phần tử hiện tại  saved = a[i];
-kiểm tra phần tử đằng trước nếu mà phần tử đằng trước mà lớn hơn saved thì ta sẽ gán a[j] = a[j-1];
-tức là gán phần tử đằng trước cho phần tử đằng sau cứ tiếp tục cho đến khi mà phần tử j = 0;
+kiểm tra phần tử đằng sau nếu mà phần tử đằng sau mà lớn hơn saved thì ta sẽ gán a[j] = a[j-1];
+tức là gán phần tử đằng sau cho phần tử đằng trước cứ tiếp tục cho đến khi mà phần tử j = 0;
 cuối cùng thì ta sẽ gán phần tử saved cho vị trí a[j]
   
   */
