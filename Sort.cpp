@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <queue>
 using namespace std;
 
 
@@ -204,29 +205,98 @@ auto CountingSort = [](auto& a) {
 
 };
 
+auto RadixSort = [](auto& a) {
+	const int n = a.size();
+	const int radix = 10;
+	int digits = (int)log10(*max_element(a.begin(), a.end())) + 1;
+	int factor;
+	queue<int> queues[radix];
+
+	
+	
+	for (int i = 1, factor = 1; i < digits; factor *= 10,  ++i ) {
+		for (int j = 0; j < n; ++j) {
+			queues[(a[j] / factor) % radix].push(a[j]);
+
+		}
+		int tmp = 0;
+		for (int k = 0; k < radix; ++k) {
+			while (!queues[k].empty()) {
+				a[tmp++] = queues[k].front(); queues[k].pop();
+			}
+		}
+	}
+		
+	
+};
+
 int main(void) {
 
 	vector<int> a{ 4,123,21,3,1,3,2,1,1 };
+	vector<int> b{ 4,123,21,3,1,3,2,1,1 };
+	vector<int> c{ 4,123,21,3,1,3,2,1,1 };
+	vector<int> d{ 4,123,21,3,1,3,2,1,1 };
+	vector<int> e{ 4,123,21,3,1,3,2,1,1 };
+	vector<int> f{ 4,123,21,3,1,3,2,1,1 };
+	vector<int> g{ 4,123,21,3,1,3,2,1,1 };
+	vector<int> h{ 4,123,21,3,1,3,2,1,1 };
+	vector<int> i{ 4,123,21,3,1,3,2,1,1 };
+	vector<int> j{ 4,123,21,3,1,3,2,1,1 };
 
+	
 	MinSort(a);
+	cout << "Min Sort: " << endl;
 	for_each(a.begin(), a.end(), print);  cout << endl;
-	InsertionSort(a);
-	for_each(a.begin(), a.end(), print); cout << endl;
-	SelectionSort(a);
-	for_each(a.begin(), a.end(), print); cout << endl;
-	ShellSort(a);
-	for_each(a.begin(), a.end(), print); cout << endl;
-	QuickSort(a, 0, a.size() - 1);
-	for_each(a.begin(), a.end(), print); cout << endl;
-	HeapSort(a);
-	for_each(a.begin(), a.end(), print); cout << endl;
-	 BubbleSort(a);
-	 for_each(a.begin(), a.end(), print); cout << endl;
-	MergeSort(a, 0, a.size() -1);
-	for_each(a.begin(), a.end(), print); cout << endl;
-	 CountingSort(a);
-	// RadixSort(a);
-	for_each(a.begin(), a.end(), print); cout << endl;
+
+	
+	InsertionSort(b);
+	cout << "Insertition Sort: " << endl;
+	for_each(b.begin(), b.end(), print); cout << endl;
+
+	
+	SelectionSort(c);
+	cout << "Selection Sort: " << endl;
+	for_each(c.begin(), c.end(), print); cout << endl;
+
+
+	
+	ShellSort(d);
+	cout << "Shell Sort: " << endl;
+	for_each(d.begin(), d.end(), print); cout << endl;
+
+	
+	QuickSort(e, 0, e.size() - 1);
+	cout << "Quick Sort: " << endl;
+	for_each(e.begin(), e.end(), print); cout << endl;
+
+
+	
+	HeapSort(f);
+	cout << "Heap Sort: " << endl;
+	for_each(f.begin(), f.end(), print); cout << endl;
+
+
+	
+	 BubbleSort(g);
+	 cout << "Bubble Sort: " << endl;
+	 for_each(g.begin(), g.end(), print); cout << endl;
+
+
+	
+	MergeSort(h, 0, h.size() -1);
+	cout << "Merge Sort: " << endl;
+	for_each(h.begin(), h.end(), print); cout << endl;
+
+	
+	 CountingSort(i);
+	 cout << "Counting Sort: " << endl;
+	 for_each(i.begin(), i.end(), print); cout << endl;
+
+
+	
+	 RadixSort(j);
+	 cout << "Radix Sort: " << endl;
+	 for_each(j.begin(), j.end(), print); cout << endl;
 	
 	
 	return 0;
