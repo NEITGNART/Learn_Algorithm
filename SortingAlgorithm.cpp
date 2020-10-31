@@ -173,7 +173,69 @@ int main(void) {
 	return 0;
 }
 
+#include <bits/stdc++.h>
 
+using namespace std;
+ofstream out("output.txt");
+
+static int k = 0;
+
+
+void print(const int a[], const int &n) {
+	for (int i = 0; i < n; ++i) {
+		out << setw(2) <<  a[i] << " ";
+	}
+}
+
+
+int Partition(int a[], int left, int right, int n) {
+	
+	int p = right;
+	int firsthigh = left;
+	
+	
+	for (int i = left; i < right; ++i) {
+		if (a[i] <= a[p]) {
+			swap(a[i], a[firsthigh++]);
+		} 
+	}
+	
+
+	
+
+	swap(a[p], a[firsthigh]);
+	return firsthigh;
+}
+
+void QuickSort(int a[], int left, int right, int n) {
+	if (right - left > 0) {
+		out << "Before partition                                ";print(a, n);
+		out << endl;
+		int partition = Partition(a, left, right, n);
+		out << "Choose " << a[partition] << " is pivot\n";
+		out << "Partition from Index " << left << " to Index " << right-1 << endl;
+		out << "After partition with pivot is: " << a[partition] << " |        ";
+		 print(a, n); cout << endl;
+		out << "Index " << left << " to Index " << partition-1 << endl;
+		QuickSort(a, left, partition-1, n);
+		out << "Index " << partition + 1 << " to Index " << right << endl;
+		QuickSort(a, partition+1, right, n);
+	} 
+}
+
+int main(void) {
+	
+	
+	
+	int a[] = {100, 77, 49, 1,29, 51,7,15,100};
+	
+	int n = sizeof(a)/sizeof(a[0]);
+	QuickSort(a, 0, n-1, n);
+	print(a, n);
+	out << endl;
+	
+	return 0;
+}
 
 
 /*
