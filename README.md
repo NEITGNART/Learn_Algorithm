@@ -13,3 +13,10 @@ __________________________15/12/2020 I'm comeback now :)))))))))))))))
 
 Disjoint Set Algorithm
 Topological Sort
+__________________________17/12/2020 I'm comeback now :)))))))))))))))
+Graph-Exercise
+__________________________18/12/2020 I'm comeback now :)))))))))))))))
+Permutation (Back Track)
+SubSet (Back Track)
+
+
